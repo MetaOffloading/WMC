@@ -14,8 +14,10 @@ import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.sam.webtasks.basictools.Counterbalance;
 import com.sam.webtasks.basictools.PHP;
 import com.sam.webtasks.basictools.TimeStamp;
+import com.sam.webtasks.client.ExtraNames;
 
 public class TimeDisplay {
 	//we can use this to check whether the display has been initialised, if not it needs to be done
@@ -33,6 +35,9 @@ public class TimeDisplay {
 	
 	//should a reminder be displayed for the next target?
 	public static boolean showReminder = false;
+	
+	//how many times does the offload button need to be clicked?
+	public static int offloadClicksRemaining;
 	
 	/*------------display parameters------------*/
 	public static String displayHeight="50%";
@@ -52,7 +57,7 @@ public class TimeDisplay {
 	
 	public static final HTML clockDisplay = new HTML();
 	public static final HTML stimulusDisplay = new HTML();
-	public static final Button offloadButton = new Button("Remind me");
+	public static final Button offloadButton = new Button();
 	
 	
 	/*------------set up display------------*/
@@ -104,17 +109,28 @@ public class TimeDisplay {
 		});
 		
 		//set up the offload button
+		offloadClicksRemaining = TimeBlock.offloadClicks;
+		
+		offloadButton.setHTML("Remind me (" + offloadClicksRemaining + ")");
+		
 		offloadButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				String data = TimeBlock.blockNumber + "," + TimeBlock.currentTime + "," + TimeStamp.Now();
+				if (--offloadClicksRemaining == 0) {
+					String data = TimeBlock.blockNumber + "," + TimeBlock.currentTime + "," + TimeStamp.Now();
 				
-				PHP.logData("TB_offloadButtonClick", data, false);
+					PHP.logData("TB_offloadButtonClick", data, false);
 				
-				showReminder=true;
-				TimeBlock.offloadButtonOperated=true;
-				TimeBlock.nReminders++;
-				offloadButton.setEnabled(false);
-				focusPanel.setFocus(true);
+					showReminder=true;
+					TimeBlock.offloadButtonOperated=true;
+					TimeBlock.nReminders++;
+					offloadButton.setEnabled(false);
+					focusPanel.setFocus(true);
+					offloadClicksRemaining = TimeBlock.offloadClicks;
+					
+					offloadButton.setHTML("Reminder set");
+				} else {
+					offloadButton.setHTML("Remind me (" + offloadClicksRemaining + ")");
+				}
 			}
 		});
 	}
@@ -181,7 +197,10 @@ public class TimeDisplay {
 	public static final Timer reminder = new Timer() {
 		public void run() {
 			//SetClockVisible(true);
-			clockDisplay.removeStyleName("hideClock");
+			if (Counterbalance.getFactorLevel("revealableClock")==ExtraNames.REVEALABLE) {
+				clockDisplay.removeStyleName("hideClock");
+			}
+			
 			clockDisplay.addStyleName("red");
 			
 			new Timer() {
@@ -193,12 +212,14 @@ public class TimeDisplay {
 	};
 	
 	public static void SetClockVisible(boolean visible) {
-		if (visible) {
-			clockDisplay.removeStyleName("clockHide");
-			clockDisplay.addStyleName("showClock");
-		} else {
-			clockDisplay.removeStyleName("showClock");
-			clockDisplay.addStyleName("hideClock");
+		if (Counterbalance.getFactorLevel("revealableClock")==ExtraNames.REVEALABLE) {
+			if (visible) {
+				clockDisplay.removeStyleName("clockHide");
+				clockDisplay.addStyleName("showClock");
+			} else {
+				clockDisplay.removeStyleName("showClock");
+				clockDisplay.addStyleName("hideClock");
+			}
 		}
 	}
 	

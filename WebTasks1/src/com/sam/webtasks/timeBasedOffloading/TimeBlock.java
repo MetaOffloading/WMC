@@ -35,19 +35,21 @@ public class TimeBlock {
 	public static int spaceBarKey = KeyCodes.KEY_SPACE;
 	public static int nonMatchKey = KeyCodes.KEY_Z;
 	public static int matchKey = KeyCodes.KEY_X;
-	public static int revealClockKey = KeyCodes.KEY_C;
+	public static int revealClockKey = KeyCodes.KEY_M;
 	public static int nBackMatchCorr ; //number of correct 'match' responses
 	public static int nBackNonMatchCorr; //number of correct 'nonmatch' responses
 	public static int nBackTargetsPresented;
 	public static int PMhits;
 	public static boolean offloadButtonOperated;
+	public static int offloadClicks; //how many times does the offload button need to be clicked?
 	public static int nReminders;
+	public static boolean spacebarPressed = false;
 	
 	//should offloading be allowed in this block?
 	public static boolean allowOffloading=true;
 	
 	//should clock always be on, or should it be revealable?
-	public static boolean clockAlwaysOn=false;
+	public static boolean clockAlwaysOn=true;
 	
 	//how long should the clock be revealed for in ms?
 	public static int clockReveal_msec = 1500;
@@ -61,10 +63,6 @@ public class TimeBlock {
 	/*-----------reset all block settings-----------*/
 	
 	public static void Init() {
-		if (TimeDisplay.isInitialised == false) {
-			TimeDisplay.Init();
-		}
-		 
 		clockVisible=true;
 		offloadButtonVisible=true;
 		currentTime=0;
@@ -86,6 +84,12 @@ public class TimeBlock {
 		PMhits=0;
 		offloadButtonOperated=false;
 		nReminders=0;
+		offloadClicks=5;
+		spacebarPressed=false;
+		
+		if (TimeDisplay.isInitialised == false) {
+			TimeDisplay.Init();
+		}
 		
 		TimeDisplay.clockDisplay.setHTML("0:00");
 		TimeDisplay.stimulusDisplay.setHTML("Press spacebar to start");

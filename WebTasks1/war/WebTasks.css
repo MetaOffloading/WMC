@@ -113,10 +113,6 @@ html, body {
 	margin-right: 5px;
 }
 
-.greenyellow {
-	color: GREENYELLOW;
-}
-
 .red {
 	color: RED;
 }
@@ -131,4 +127,8 @@ html, body {
 
 .showClock {
 	color: BLACK;
+}
+
+.greenyellow {
+	color: GREENYELLOW;
 }

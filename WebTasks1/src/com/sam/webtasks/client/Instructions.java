@@ -30,6 +30,21 @@ public class Instructions {
 					+ "But you should also try to do the timer task at the same time, if you can.<br><br>"
 					+ "If you press the spacebar within 2 seconds of the instructed time (for example "
 					+ "0:18 to 0:22) this will be counted as correct.";
+			break;	
+		case 21:
+			i = "Now you will practice the same task again, but this time the clock will not automatically stay "
+					+ "on the screen.<br><br>You can reveal the clock to check the time whenever you want by pressing "
+					+ "the <b>M</b> button. You can do this as many times as you like.<br><br>For the rest of the experiment, "
+					+ "you will need to press the <b>M</b> button to reveal the clock.<br><br>Each time you are asked to press "
+					+ "the spacebar, you can only do this <b>once</b>. For example, if you are told to press the spacebar at "
+					+ "0:20 and you already press it at 0:15, it will not count if you press it again. So you should only "
+					+ "press the spacebar when it is time to do so.<br><br>Please click below to practice.";
+			break;
+		case 22:
+			i = "Each time you are asked to press "
+					+ "the spacebar, you can only do this <b>once</b>. For example, if you are told to press the spacebar at "
+					+ "0:20 and you already press it at 0:15, it will not count if you press it again. So you should only "
+					+ "press the spacebar when it is time to do so.<br><br>Please click below to practice again.";
 			break;
 		case 30:
 			i = "In the main experiment you will score one point each time you press the correct button "
@@ -77,7 +92,8 @@ public class Instructions {
 		case 90:
 			i = "There is one last thing to explain about the task. Sometimes, there will be a button on "
 					+ "the screen saying \"Remind Me\". Once you have been told to press the spacebar at "
-					+ "a particular time, you can press this button to set a reminder. This means that when "
+					+ "a particular time, you can use this button to set a reminder. You need to press this button "
+					+ "<b>five times</b> to set a reminder. This means that when "
 					+ "it's nearly time to press the spacebar, the clock will start flashing to remind you.<br><br>"
 					+ "Please try using this button now.";
 			break;

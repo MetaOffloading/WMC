@@ -2,6 +2,7 @@ package com.sam.webtasks.timeBasedOffloading;
 
 import java.util.Date;
 
+import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -18,6 +19,15 @@ public class TimeResponse {
 		//end of block? if so return control to the sequencehandler
 		//we specify blockDuration in seconds if it is positive, or trials if it is negative
 		boolean blockOver = false;
+		
+		/*
+		if (response==KeyCodes.KEY_Q) {
+			TimeBlock.PMhits=1;
+			TimeBlock.nBackMatchCorr=1;
+			TimeBlock.nBackNonMatchCorr=1;
+			blockOver = true;
+		}
+		*/
 		
 		if (TimeBlock.blockDuration > 0) { //specified in seconds
 			if (TimeBlock.currentTime >= TimeBlock.blockDuration) {
@@ -47,15 +57,22 @@ public class TimeResponse {
 				}
 			}.schedule(1000);
 		} else if (TimeDisplay.timeForInstruction) {
+			TimeBlock.spacebarPressed=false;
+			
 			TimeDisplay.timeForInstruction=false;
 			
 			TimeDisplay.focusPanel.setFocus(false);
 			
 			TimeDisplay.stimulusDisplay.setHTML("");
 			
+			TimeDisplay.offloadButton.setHTML("Remind me (" + TimeDisplay.offloadClicksRemaining + ")");
+			
 			new Timer() {
 				public void run() {
 					if (!TimeDisplay.waitForSpacebar) { 
+						//make sure clock is visible if there is a PM instruction
+						TimeDisplay.SetClockVisible(true);
+						
 						TimeDisplay.stimulusDisplay.setHTML(TimeDisplay.instructionString);
 						TimeDisplay.waitForSpacebar=true;
 						TimeDisplay.focusPanel.setFocus(true);
@@ -80,6 +97,15 @@ public class TimeResponse {
 				TimeDisplay.stimulusDisplay.setHTML("");
 				TimeDisplay.startClock();
 				
+				//set timer to remove clock if it's not always on
+				if (!TimeBlock.clockAlwaysOn) {
+					new Timer() {
+						public void run() {
+							TimeDisplay.SetClockVisible(false);
+						}
+					}.schedule(TimeBlock.clockReveal_msec);
+				}
+				
 				new Timer() {
 					public void run() {
 						TimeDisplay.stimulusDisplay.setHTML(TimeDisplay.generateStimulus());
@@ -93,6 +119,14 @@ public class TimeResponse {
 			if ((response == TimeBlock.matchKey)||(response == TimeBlock.nonMatchKey)) { //increment trial number if one of the 2back keys was pressed
 				TimeBlock.trialNumber++;
 			} else if (response == TimeBlock.revealClockKey) {
+				String data = TimeBlock.blockNumber + "," + TimeBlock.offloadButtonVisible + ",";
+				data = data + TimeBlock.trialNumber + "," + TimeDisplay.stimulus + ",";
+				data = data + TimeDisplay.awaitingPMresponse + "," + (TimeDisplay.stimulus == TimeDisplay.stimulus_2back) + ",";
+				data = data + TimeBlock.currentTime + ",";
+				data = data + TimeStamp.Now();
+				
+				PHP.logData("TB_clockCheck", data, false);
+				
 				TimeDisplay.SetClockVisible(true);
 				
 				if (!TimeBlock.clockAlwaysOn) {
@@ -137,14 +171,18 @@ public class TimeResponse {
 						TimeDisplay.reminder.cancel();
 						TimeDisplay.showReminder = false;
 						TimeDisplay.offloadButton.setEnabled(false);
-						
-						TimeDisplay.clockDisplay.addStyleName("greenyellow");
+
+						if (TimeBlock.spacebarPressed==false) {
+							TimeDisplay.clockDisplay.addStyleName("greenyellow");
+						}
 						
 						new Timer() {
 							public void run() {
 								TimeDisplay.clockDisplay.removeStyleName("greenyellow");
 							}
 						}.schedule(200);
+					} else { //premature space-bar
+						TimeBlock.spacebarPressed=true;
 					}
 				}
 			} else if ((response==TimeBlock.matchKey)||(response==TimeBlock.nonMatchKey)) {
