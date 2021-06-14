@@ -71,8 +71,7 @@ public class SequenceHandler {
 				
 				String data = TimeStamp.Now() + ",";
 				data = data + Counterbalance.getFactorLevel("startingCondition") + ",";
-				data = data + Counterbalance.getFactorLevel("buttonPositions") + ",";
-				data = data + Counterbalance.getFactorLevel("buttonColours") + ",";
+				data = data + Counterbalance.getFactorLevel("revealableClock") + ",";
 				data = data + SessionInfo.prolificExperimentCode;
 				
 				PHP.logData("start", data, true);
@@ -335,6 +334,7 @@ public class SequenceHandler {
 				String data2 = TimeStamp.Now() + ",";
 				data2 = data2 + SessionInfo.prolificExperimentCode + ",";
 				data2 = data2 + Counterbalance.getFactorLevel("startingCondition") + ",";
+				data2 = data2 + Counterbalance.getFactorLevel("revealableClock") + ",";
 				data2 = data2 + SessionInfo.gender + ",";
 				data2 = data2 + SessionInfo.age;
 				
