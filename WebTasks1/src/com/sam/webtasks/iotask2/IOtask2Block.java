@@ -15,6 +15,9 @@ public class IOtask2Block {
 
 	// number of trials to run
 	public int nTrials = 1;
+	
+	// run the WMC paradigm?
+	public boolean WMC = false;
 
 	// run a standard 17-trial block?
 	public boolean standard17block = false;

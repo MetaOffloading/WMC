@@ -17,6 +17,14 @@ public class IOtask2BlockContext {
 	public static IOtask2Block getContext() {
 		return (blockContext);
 	}
+	
+	public static boolean WMC() {
+		return (blockContext.WMC);
+	}
+	
+	public static int getNtargets() {
+		return (blockContext.nTargets);
+	}
 
 	// use these methods to set and find out the currently clicked circle
 	public static void setClickedCircle(int clickedCircle) {

@@ -15,6 +15,10 @@ public class IOtask2InitialiseTrial {
 		
 		if (block.nTargetsVariable) {
 			block.nTargets = block.nTargetsList.get(block.currentTrial);
+			
+			if (block.WMC) {
+				block.totalCircles = block.nTargets + block.nCircles;
+			}
 		}
 
 		block.reminderFlag = -1;

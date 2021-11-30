@@ -75,9 +75,11 @@ public class Initialise {
 				} else { //specified level
 					Counterbalance.addFactor(SessionInfo.counterbalanceFactors[i], SessionInfo.counterbalanceLevels[i], SessionInfo.specifiedLevels[i]);
 				}
-			}
-			
-			
+			}	
+		}
+		
+		if (SessionInfo.experimentType == Names.EXPERIMENT_WMC) {
+			SessionInfo.participantID = Window.Location.getParameter("id");
 		}
 		
 
