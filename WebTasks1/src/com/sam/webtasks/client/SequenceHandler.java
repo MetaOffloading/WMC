@@ -128,38 +128,65 @@ public class SequenceHandler {
 				block4.Run();
 				break;
 			case 12:
-				ClickPage.Run(Instructions.Get(6), "Next");
+				Slider.Run(Instructions.Get(6), "0%", "100%");
 				break;
 			case 13:
+				PHP.logData("jol1", ""+Slider.getSliderValue(), true);
+				break;
+			case 14:
+				Slider.Run(Instructions.Get(7), "0%", "100%");
+				break;
+			case 15:
+				PHP.logData("jol3", ""+Slider.getSliderValue(), true);
+				break;
+			case 16:
+				Slider.Run(Instructions.Get(8), "0%", "100%");
+				break;
+			case 17:
+				PHP.logData("jol5", ""+Slider.getSliderValue(), true);
+				break;
+			case 18:
+				Slider.Run(Instructions.Get(9), "0%", "100%");
+				break;
+			case 19:
+				PHP.logData("jol7", ""+Slider.getSliderValue(), true);
+				break;		
+			case 20:
+				ClickPage.Run(Instructions.Get(10), "Next");
+				break;
+			case 21:
 				IOtask2Block block5 = new IOtask2Block();
 				block5.totalCircles = 13;
 				block5.blockNum = -6;
 				block5.nTargets = 7;
+				block5.offloadCondition=Names.REMINDERS_MANDATORY_TARGETONLY;
 				block5.Run();
 				break;
-			case 14:
+			case 22:
 				if (IOtask2BlockContext.getnHits() < 6) { 
 					SequenceHandler.SetPosition(SequenceHandler.GetPosition()-2); //this line means that instead of moving forward we will repeat the previous instructions
-					ClickPage.Run(Instructions.Get(7), "Try again");
+					ClickPage.Run(Instructions.Get(11), "Try again");
 				} else {
 					SequenceHandler.Next(); //move to the next instruction
 				}
 				break;
-			case 15:
-				ClickPage.Run(Instructions.Get(8),  "Next");
+			case 23:
+				ClickPage.Run(Instructions.Get(12),  "Next");
 				break;
-			case 16:
+			case 24:
 				//add progress bar to screen
 				ProgressBar.Initialise();
 				ProgressBar.Show();
-				ProgressBar.SetProgress(0,  16);
+				ProgressBar.SetProgress(0,  48);
 				Params.progress=0;
 				
 				IOtask2Block block6 = new IOtask2Block();
+				block6.blockNum = 1;
 				block6.WMC = true;
 				block6.nTargetsVariable = true;
 				block6.nTargetsShuffle = true;
 				block6.updateProgress = true;
+				block6.offloadCondition=Names.REMINDERS_NOTALLOWED;
 				
 				for (int i=0; i<4; i++) {
 					block6.nTargetsList.add(1);
@@ -173,10 +200,57 @@ public class SequenceHandler {
 				
 				block6.Run();	
 				break;
-			case 17:
+			case 25:
+				ClickPage.Run(Instructions.Get(13),  "Next");
+				break;
+			case 26:
+				IOtask2Block block7 = new IOtask2Block();
+				block7.blockNum = 2;
+				block7.WMC = true;
+				block7.nTargetsVariable = true;
+				block7.nTargetsShuffle = true;
+				block7.updateProgress = true;
+				block7.offloadCondition=Names.REMINDERS_MANDATORY_TARGETONLY;
+				
+				for (int i=0; i<4; i++) {
+					block7.nTargetsList.add(1);
+					block7.nTargetsList.add(3);
+					block7.nTargetsList.add(5);
+					block7.nTargetsList.add(7);
+				}
+				
+				block7.nTrials = 16;
+
+				
+				block7.Run();	
+				break;
+			case 27:
+				ClickPage.Run(Instructions.Get(14),  "Next");
+				break;
+			case 28:
+				IOtask2Block block8 = new IOtask2Block();
+				block8.blockNum = 3;
+				block8.WMC = true;
+				block8.nTargetsVariable = true;
+				block8.nTargetsShuffle = true;
+				block8.updateProgress = true;
+				
+				for (int i=0; i<4; i++) {
+					block8.nTargetsList.add(1);
+					block8.nTargetsList.add(3);
+					block8.nTargetsList.add(5);
+					block8.nTargetsList.add(7);
+				}
+				
+				block8.nTrials = 16;
+
+				
+				block8.Run();	
+				break;
+			case 29:
 				ProgressBar.Hide();
 				
-				ClickPage.Run(Instructions.Get(9),  "nobutton");
+				ClickPage.Run(Instructions.Get(15),  "nobutton");
 				break;
 			}
 			break;
@@ -309,8 +383,18 @@ public class SequenceHandler {
 							s = "s";
 						}
 						
-						ClickPage.Run("This time you will get " + IOtask2BlockContext.getNtargets() + " special circle" + s + ". "
-								+ "It is up to you whether to set reminders or remember them with your own memory.", "Continue");					
+						String reminderString = "It is up to you whether to set reminders or remember them with your own memory.";
+						
+						if (IOtask2BlockContext.getOffloadCondition() == Names.REMINDERS_MANDATORY_TARGETONLY) {
+							reminderString = "You must set a reminder for each special circle.";
+						}
+						
+						if (IOtask2BlockContext.getOffloadCondition() == Names.REMINDERS_NOTALLOWED) {
+							reminderString = "You will not be able to set reminders, so you have to use your own memory.";
+						}
+						
+						ClickPage.Run("This time you will get " + IOtask2BlockContext.getNtargets() + " special circle" + s + ".<br><br>"
+								+ reminderString, "Continue");					
 					} else	{
 						SequenceHandler.Next();
 					}

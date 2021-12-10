@@ -52,23 +52,68 @@ public class Instructions {
 					+ "Don't worry if you do not remember all of them. That's fine - just try to remember as many as you can.";
 			break;
 		case 6:
+			i = "Now that you have had some practice, we would like you to tell us how accurately you "
+					+ "think you can perform this task when you have <b>only 1</b> special circle to remember. "
+					+ "<br><br>Please use the scale below to indicate what percentage "
+					+ "of times you will remember to drag the special circle to the instructed side."
+					+ "<br><br>100% would mean that you will always get every single one correct. 0% would mean "
+					+ "that you can never get any of them correct.";
+			break;
+		case 7:
+			i = "Now that you have had some practice, we would like you to tell us how accurately you "
+					+ "think you can perform this task when you have <b>3</b> special circles to remember. "
+					+ "<br><br>Please use the scale below to indicate what percentage "
+					+ "of times you will remember to drag the special circles to the instructed side."
+					+ "<br><br>100% would mean that you will always get every single one correct. 0% would mean "
+					+ "that you can never get any of them correct.";
+			break;
+		case 8:
+			i = "Now that you have had some practice, we would like you to tell us how accurately you "
+					+ "think you can perform this task when you have <b>5</b> special circles to remember. "
+					+ "<br><br>Please use the scale below to indicate what percentage "
+					+ "of times you will remember to drag the special circles to the instructed side."
+					+ "<br><br>100% would mean that you will always get every single one correct. 0% would mean "
+					+ "that you can never get any of them correct.";
+			break;
+		case 9:
+			i = "Now that you have had some practice, we would like you to tell us how accurately you "
+					+ "think you can perform this task when you have <b>7</b> special circles to remember. "
+					+ "<br><br>Please use the scale below to indicate what percentage "
+					+ "of times you will remember to drag the special circle to the instructed side."
+					+ "<br><br>100% would mean that you will always get every single one correct. 0% would mean "
+					+ "that you can never get any of them correct.";
+			break;
+		case 10:
 			i="Now we are going to explain a strategy that can make the task easier.<br><br>"
                     + "When you see a special circle, you can set a reminder by immediately dragging it to a "
                     + "different part of the box. For example, if a circle initially appeared in blue, you "
                     + "could immediately drag it next to the blue (left) side of the box. Then, when "
                     + "you get to that circle in the sequence its location would remind you where it is supposed "
-                    + "to go. If you do this for all of the special circles it should be easy to remember them.<br><br>Please now try the task again, using this strategy to help you.";
+                    + "to go. If you do this for all of the special circles it should be easy to remember them."
+                    + "<br><br>Please now try the task again, using this strategy to help you. The computer will "
+                    + "only let you proceed if you set a reminder for each special circle.";
 			break;
-		case 7:
+		case 11:
 			i="You need to respond correctly to at least 6 of the special circles to continue.";
 			break;
-		case 8:
-			i="Now the experiment will start for real.<br><br>You will do the task 16 times and you will "
+		case 12:
+			i="Now the experiment will start for real.<br><br>In the next block of trials you will do the task 16 times and you will "
 					+ "always be told whether you are going to get "
-				+ "1, 3, 5, or 7 special circles to remember.<br><br>It is up to you whether to set reminders or just "
-				+ "remember them with your own memory. Feel free to do whatever you prefer.";
+				+ "1, 3, 5, or 7 special circles to remember.<br><br>You will <b>not</b> be able to set reminders in this "
+				+ "part of the experiment. So you will have to rely on your own memory alone.";
+			break;
+		case 13:
+			i="In the next part of the experiment you will do the task 16 times again.<br><br>"
+			    + "But this time, you <b>must</b> set a reminder for every special circle.<br><br>"
+			    + "The computer will not let you proceed unless you set a reminder every time.";
+			break;
+		case 14:
+			i="Now it is time for the final part of the experiment.<br><br>This time, it is up to you whether to set reminders or just "
+				+ "remember the special circles with your own memory.<br><br>"
+				+ "You can choose whichever option you prefer. So each time you do the task, feel free to either set reminders for the special "
+				+ "circles or just use your own memory. It is totally up to you.";
 			break;	
-		case 9:
+		case 15:
 			i="Thank you. You have now completed this part of the experiment.<br><br>Your completion code "
 					+ "is 123456.<br><br>Please click <a href='http://www.google.com'>THIS LINK</a> to continue.";
 			break;
