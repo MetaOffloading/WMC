@@ -113,7 +113,7 @@ public class PHP {
 							cancel();
 
 							if (phpOutput.contains("exists")) {
-								Window.alert("You have previously taken part in one of our earlier experiments. Unfortunately this means that you re not able to participate in this one and you should return the HIT.");
+								Window.alert("You have previously taken part in one of our earlier experiments. Unfortunately this means that you are not able to participate in this one and you should return the HIT.");
 							}
 							
 							if (phpOutput.contains("unknown")) {
@@ -162,13 +162,13 @@ public class PHP {
 							} else {
 								// otherwise throw an error
 								Window.alert(
-										"Your ID has previously been used to access this experiment. Unfortunately this means you will not be able to take part again and you should return the HIT.");
+										"Your ID has previously been used to access this experiment. Unfortunately this means you will not be able to take part again.");
 							}
 							break;
 						case Names.ELIGIBILITY_NEVERCOMPLETED:
 							if (phpOutput.contains("finished")) {
 								Window.alert(
-										"Your ID has previously been used to access this experiment. Unfortunately this means you will not be able to take part again and you should return the HIT.");
+										"Your ID has previously been used to access this experiment. Unfortunately this means you will not be able to take part again.");
 							} else if (phpOutput.contains("unknown")) {
 								// fine to continue if the ID hasn't been used before
 								SequenceHandler.Next();

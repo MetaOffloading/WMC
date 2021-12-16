@@ -40,6 +40,7 @@ import com.sam.webtasks.basictools.Initialise;
 import com.sam.webtasks.basictools.Names;
 import com.sam.webtasks.basictools.PHP;
 import com.sam.webtasks.basictools.ProgressBar;
+import com.sam.webtasks.basictools.SessionKey;
 import com.sam.webtasks.basictools.Slider;
 import com.sam.webtasks.basictools.TimeStamp;
 import com.sam.webtasks.iotask1.IOtask1Block;
@@ -70,6 +71,8 @@ public class SequenceHandler {
 			 * The code here defines the main sequence of events in the experiment *
 			 **********************************************************************/
 			case 1:
+				SessionInfo.sessionKey = SessionKey.Get();
+				
 				ClickPage.Run(Instructions.Get(0), "Next");
 				break;
 			case 2:
@@ -77,6 +80,7 @@ public class SequenceHandler {
 				block0.totalCircles = 7;
 				block0.blockNum = -1;
 				block0.nTargets = 0;
+				block0.logDragData = true;
 				block0.Run();
 				break;
 			case 3:
@@ -87,6 +91,7 @@ public class SequenceHandler {
 				block1.totalCircles = 7;
 				block1.blockNum = -2;
 				block1.nTargets = 1;
+				block1.logDragData = true;
 				block1.Run();
 				break;
 			case 5:
@@ -105,6 +110,7 @@ public class SequenceHandler {
 				block2.totalCircles = 9;
 				block2.blockNum = -3;
 				block2.nTargets = 3;
+				block2.logDragData = true;
 				block2.Run();
 				break;
 			case 8:
@@ -115,6 +121,7 @@ public class SequenceHandler {
 				block3.totalCircles = 11;
 				block3.blockNum = -4;
 				block3.nTargets = 5;
+				block3.logDragData = true;
 				block3.Run();
 				break;
 			case 10:
@@ -125,6 +132,7 @@ public class SequenceHandler {
 				block4.totalCircles = 13;
 				block4.blockNum = -5;
 				block4.nTargets = 7;
+				block4.logDragData = true;
 				block4.Run();
 				break;
 			case 12:
@@ -160,6 +168,7 @@ public class SequenceHandler {
 				block5.blockNum = -6;
 				block5.nTargets = 7;
 				block5.offloadCondition=Names.REMINDERS_MANDATORY_TARGETONLY;
+				block5.logDragData = true;
 				block5.Run();
 				break;
 			case 22:
@@ -197,7 +206,7 @@ public class SequenceHandler {
 				
 				block6.nTrials = 16;
 
-				
+				block6.logDragData = true;
 				block6.Run();	
 				break;
 			case 25:
@@ -221,7 +230,7 @@ public class SequenceHandler {
 				
 				block7.nTrials = 16;
 
-				
+				block7.logDragData = true;
 				block7.Run();	
 				break;
 			case 27:
@@ -244,12 +253,19 @@ public class SequenceHandler {
 				
 				block8.nTrials = 16;
 
-				
+				block8.logDragData = true;
 				block8.Run();	
 				break;
 			case 29:
 				ProgressBar.Hide();
 				
+				String finishData = "" + TimeStamp.Now();
+				
+				PHP.UpdateStatus("finished");
+				PHP.logData("finish", finishData, true);
+				
+				break;
+			case 30:
 				ClickPage.Run(Instructions.Get(15),  "nobutton");
 				break;
 			}

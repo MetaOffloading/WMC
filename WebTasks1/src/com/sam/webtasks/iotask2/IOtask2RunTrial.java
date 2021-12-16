@@ -45,6 +45,7 @@ import com.sam.webtasks.basictools.PHP;
 import com.sam.webtasks.basictools.ProgressBar;
 import com.sam.webtasks.client.Params;
 import com.sam.webtasks.client.SequenceHandler;
+import com.sam.webtasks.client.SessionInfo;
 import com.sam.webtasks.iotask1.IOtask1BlockContext;
 import com.sam.webtasks.iotask1.IOtask1DisplayParams;
 
@@ -527,6 +528,10 @@ public class IOtask2RunTrial {
 						data = data + (IOtask2BlockContext.getNextCircle() + IOtask2BlockContext.getCircleAdjust())
 								+ ",";
 						data = data + IOtask2BlockContext.getExitFlag() + "," + IOtask2BlockContext.getSurpriseTest();
+						
+						if (SessionInfo.experimentType == Names.EXPERIMENT_WMC) {
+							data = data + "," + IOtask2BlockContext.getNtargets();
+						}
 
 						PHP.logData("dragEnd", data, false);
 					}

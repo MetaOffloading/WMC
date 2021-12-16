@@ -114,8 +114,15 @@ public class Instructions {
 				+ "circles or just use your own memory. It is totally up to you.";
 			break;	
 		case 15:
-			i="Thank you. You have now completed this part of the experiment.<br><br>Your completion code "
-					+ "is 123456.<br><br>Please click <a href='http://www.google.com'>THIS LINK</a> to continue.";
+			i="Well done! You are now finished with this task.<br><br>"
+					+ "Experiment code (write down correctly!): <b>" + ConfirmationCode.Get()
+					+ "</b><br><br>In just a moment this task will close. To move onto the next task, you will click "
+					+ "the link below to return to the original webpage where you opened the experiment. Then you will enter "
+					+ "the above experiment code where prompted. After you enter the experiment code, you will move onto the "
+					+ "next part of the study. Make sure to write down the code properly or otherwse you will not be able "
+					+ "to continue!<br><br>"
+					+ "After writing down thew code, click <b><a href='https://psychology.psy.sunysb.edu/cam_lab/PROC_V2/'>THIS LINK</a></b> "
+					+ "to exit the program.";
 			break;
 		}
 
