@@ -116,13 +116,9 @@ public class Instructions {
 		case 15:
 			i="Well done! You are now finished with this task.<br><br>"
 					+ "Experiment code (write down correctly!): <b>" + ConfirmationCode.Get()
-					+ "</b><br><br>In just a moment this task will close. To move onto the next task, you will click "
-					+ "the link below to return to the original webpage where you opened the experiment. Then you will enter "
-					+ "the above experiment code where prompted. After you enter the experiment code, you will move onto the "
-					+ "next part of the study. Make sure to write down the code properly or otherwse you will not be able "
-					+ "to continue!<br><br>"
-					+ "After writing down thew code, click <b><a href='https://psychology.psy.sunysb.edu/cam_lab/PROC_V2/'>THIS LINK</a></b> "
-					+ "to exit the program.";
+					+ "</b><br><br>In just a moment this task will close. To move onto the next task, "
+					+ "please return to the original webpage where you opened the experiment. "
+					+ "Then you will enter the above experiment code when prompted.";
 			break;
 		}
 
