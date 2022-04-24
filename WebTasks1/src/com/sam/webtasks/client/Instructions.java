@@ -115,10 +115,10 @@ public class Instructions {
 			break;	
 		case 15:
 			i="Well done! You are now finished with this task.<br><br>"
-					+ "Experiment code (write down correctly!): <b>" + ConfirmationCode.Get()
-					+ "</b><br><br>In just a moment this task will close. To move onto the next task, "
+					+ "Confirmation code: <b>" + ConfirmationCode.Get()
+					+ "</b><br>PLEASE MAKE SURE TO WRITE THIS CONFIRMATION CODE DOWN CORRECTLY<br><br>In just a moment this task will close. To move onto the next task, "
 					+ "please return to the original webpage where you opened the experiment. "
-					+ "Then you will enter the above experiment code when prompted.";
+					+ "Then you will enter the above confirmation code when prompted.";
 			break;
 		}
 
